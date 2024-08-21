@@ -1,6 +1,5 @@
 "use strict"
-let humanScore = 0;
-let computerScore = 0;
+
 function getHumanChoice() {
     return prompt("Choose between rock paper or scissors").toLowerCase();
 }
@@ -16,9 +15,16 @@ function getComputerChoice() {
     }
 }
 
-function playRound() {
-    let humanChoice = getHumanChoice(); 
-    let computerChoice = getComputerChoice();
+
+function play() {
+    let humanChoice;
+    let computerChoice;
+    let humanScore = 0;
+    let computerScore = 0;
+
+    function playRound() {
+        humanChoice = getHumanChoice(); 
+        computerChoice = getComputerChoice();
     if (computerChoice === "paper" && humanChoice === "scissors") {
         humanScore++;
         console.log("you won!, scissors cut paper");
@@ -46,19 +52,25 @@ function playRound() {
     } 
 }
 
-function play() {
-    for (let i=0;i<=5;i++) {
+    for (let i=1;i<=5;i++) {
         playRound();
-        if (i === 5 && humanScore>computerScore) {
-            console.log("Congratulations!, you won the game")
-        } else if (i === 5 && humanScore<computerScore) {
-            console.log("You lost the game, good luck next time")
-        } else if (i === 5 && humanScore===computerScore){
-            console.log("It's a tie!")
-        } else if(humanScore===0 && computerScore===0) {
-            return;
-        }
+        while (humanChoice === "" || 
+            humanChoice === null || 
+            (humanChoice !== "rock" && 
+            humanChoice !== "paper" && 
+            humanChoice !== "scissors")) {
+              alert("That's an invalid choice, try again");
+              playRound();
+            }
     }
+    
+    if (humanScore>computerScore) {
+        console.log("Congratulations!, you won the game")
+    } else if (humanScore<computerScore) {
+        console.log("You lost the game, good luck next time")
+    } else if (humanScore===computerScore){
+        console.log("It's a tie!")
+    } 
 }
 
 play();
