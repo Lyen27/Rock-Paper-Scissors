@@ -4,6 +4,7 @@ const buttons = document.querySelectorAll('button');
 const messages = document.querySelector('.message');
 const humanPoints = document.querySelector('.human');
 const computerPoints = document.querySelector('.computer');
+const random = document.querySelector('.random');
 let computerScore = 0;
 let humanScore = 0;
 
@@ -13,7 +14,9 @@ function play(e) {
     
     let computerChoice = getComputerChoice();
     let humanChoice = e.target.textContent.toLowerCase();
-
+    
+    random.textContent = computerChoice;
+    
     switch (humanChoice) {
         case "rock":
             if (computerChoice === "rock") {
